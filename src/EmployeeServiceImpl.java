@@ -52,20 +52,58 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void calculateBonus(Employee employee){
-        if(employee instanceof Manager){
-            ((Manager) employee).setTeamSize(((Manager) employee).getTeamSize() + 1);
-            if(((Manager) employee).getTeamSize() > 15) ((Manager) employee).setSalary(((Manager) employee).getSalary()*1.1);
-        } else if(employee instanceof Developer){
-            switch (((Developer) employee).progrLang) {
-                case "C#":
-                    ((Developer) employee).setSalary(((Developer) employee).getSalary()*1.07);
-                    break;
-                case "Java":
-                    ((Developer) employee).setSalary(((Developer) employee).getSalary()*1.12);
-                    break;
-                default:
-                    break;
-            }
+        if(employee instanceof Manager) {
+            ((Manager) employee).setSalary(((Manager) employee).getSalary() * 1.10);
+            return;
         }
+        if(employee instanceof Developer) {
+            ((Developer) employee).setSalary(((Developer) employee).getSalary() * 1.05);
+            return;
+        }
+        employee.setSalary(employee.getSalary() * 1.03);
     }
+
+    public  void evaluatePerformance(Employee employee, int performanceScore){
+        if(performanceScore >= 9) {
+            employee.setSalary(employee.getSalary() * 1.10);
+            return;
+        }
+        if(performanceScore >= 7) {
+            employee.setSalary(employee.getSalary() * 1.05);
+            return;
+        }
+        System.out.println("Darbuotojo veikla nepatenkinama.");
+    }
+
+    public void transferDepartment(Employee employee, String newDepartment){
+        employee.setDepartment(newDepartment);
+    }
+
+    public void listAllEmployees(List<Employee> employees){
+         for(Employee item: employees){
+             if(item instanceof Manager) {
+                 String temp = String.format("%.2f", ((Manager) item).getSalary());
+                 System.out.println("Vardas: " + ((Manager) item).getName() +
+                         ", amžius " + ((Manager) item).getAge() +
+                         ", uždarbis " + temp +
+                         ", departamentas " + ((Manager) item).getDepartment() +
+                         ", komandos dydis " + ((Manager) item).getTeamSize());;
+             } else if(item instanceof Developer) {
+                        String temp = String.format("%.2f", ((Developer) item).getSalary());
+                        System.out.println("Vardas: " + ((Developer) item).getName() +
+                                 ", amžius " + ((Developer) item).getAge() +
+                                ", uždarbis " + temp +
+                                ", departamentas " + ((Developer) item).getDepartment() +
+                                ", programavimo kalba " + ((Developer) item).getProgrLang());;
+             }
+         }
+    }
+
+    public Employee findEmployeeByName(List<Employee> employees, String name){
+        for(Employee item: employees){
+            if(item.getName().equals(name)) return item;
+        }
+         return null;
+    }
+
 }

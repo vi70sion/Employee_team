@@ -29,12 +29,12 @@ public class Main {
 //        Kviečiant EmployeeService.performDuties(Employee employee) metodą, atlikite atitinkamus veiksmus pagal darbuotojo tipą.
 
         List<Employee> employeeList = new ArrayList<>();
-        employeeList.add(new Manager("Manager1", 45, 2900.00, 15));
-        employeeList.add(new Developer("Developer1", 25, 1200.00, "Java"));
-        employeeList.add(new Developer("Developer2", 19, 750.00, "C#"));
-        employeeList.add(new Developer("Developer3", 39, 3900.00, "Java"));
-        employeeList.add(new Developer("Developer4", 32, 2500.00, "C++"));
-        employeeList.add(new Manager("Manager2", 32, 1900.00, 5));
+        employeeList.add(new Manager("Manager1", 45, 2900.00, "marketing",15));
+        employeeList.add(new Developer("Developer1", 25, 1200.00, "information technology","Java"));
+        employeeList.add(new Developer("Developer2", 19, 750.00, "information technology","C#"));
+        employeeList.add(new Developer("Developer3", 39, 3900.00, "information technology","Java"));
+        employeeList.add(new Developer("Developer4", 32, 2500.00, "information technology","C++"));
+        employeeList.add(new Manager("Manager2", 32, 1900.00, "operations management",5));
 
         printTeam(employeeList);
         System.out.println();
@@ -78,10 +78,6 @@ public class Main {
                 else System.out.println("Yra " + ((Developer) item).progrLang + " programuotojas, uždirba " + item.getSalary());
             }
         }
-    }
-
-    public void fireEmployee(List<Employee> employeeList, Employee employee){
-
     }
 
 }
